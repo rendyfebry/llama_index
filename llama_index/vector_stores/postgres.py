@@ -526,7 +526,7 @@ class PGVectorStore(BasePydanticVectorStore):
                     node_id=item.node_id,
                     text=item.text,
                     metadata=item.metadata_,
-                    similarity=item.rank,
+                    similarity=(1 - item.rank) if item.rank is not None else 0,
                 )
                 for item in res.all()
             ]
@@ -545,7 +545,7 @@ class PGVectorStore(BasePydanticVectorStore):
                     node_id=item.node_id,
                     text=item.text,
                     metadata=item.metadata_,
-                    similarity=item.rank,
+                    similarity=(1 - item.rank) if item.rank is not None else 0,
                 )
                 for item in res.all()
             ]
